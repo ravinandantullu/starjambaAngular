@@ -1,0 +1,27 @@
+<todo-header></todo-header>
+<div>
+  <input type="text" name="addTodoValue" #addTodoValue />
+  <button (click)="addToDo(addTodoValue.value)">Add</button>
+</div>
+<form class="to-do">
+  <ul>
+    <li *ngFor="let toDo of toDoList; let i = index" class="to-do-list">
+      <div>
+        <div *ngIf="toDo.editButtonHide">{{ toDo.value }}</div>
+        <div [hidden]="toDo.editButtonHide">
+          <input name="editText" type="text" #editText />
+        </div>
+      </div>
+      <button *ngIf="toDo.editButtonHide" (click)="editToDo(toDo)">Edit</button>
+      <button
+        *ngIf="!toDo.editButtonHide"
+        (click)="doneEdit(toDo, editText.value)"
+      >
+        Done
+      </button>
+      <button *ngIf="toDo.editButtonHide" (click)="deleteToDo(toDo)">
+        Delete
+      </button>
+    </li>
+  </ul>
+</form>
