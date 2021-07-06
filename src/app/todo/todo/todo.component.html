@@ -3,7 +3,7 @@
   <input type="text" name="addTodoValue" #addTodoValue />
   <button (click)="addToDo(addTodoValue.value)">Add</button>
 </div>
-<form class="to-do">
+<div class="to-do">
   <ul>
     <li *ngFor="let toDo of toDoList; let i = index" class="to-do-list">
       <div>
@@ -22,6 +22,9 @@
       <button *ngIf="toDo.editButtonHide" (click)="deleteToDo(toDo)">
         Delete
       </button>
+      <button *ngIf="!toDo.editButtonHide" (click)="unDoEdit(toDo)">
+        Undo Edit
+      </button>
     </li>
   </ul>
-</form>
+</div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-todo',
@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./todo.component.sass'],
 })
 export class TodoComponent implements OnInit {
+  @ViewChild('addTodoValue', { static: false }) addTodoValue!: ElementRef;
   toDoList: ToDoList[] = [
     {
       id: '1',
@@ -39,11 +40,15 @@ export class TodoComponent implements OnInit {
   ngOnInit(): void {}
 
   addToDo(value: string) {
+    if (!value) {
+      return;
+    }
     this.toDoList.push({
       id: this.uid(),
       value: value,
       editButtonHide: true,
     });
+    this.addTodoValue.nativeElement.value = '';
   }
 
   deleteToDo(value: ToDoList) {
@@ -57,8 +62,18 @@ export class TodoComponent implements OnInit {
 
   doneEdit(value: ToDoList, editText: string) {
     const index = this.toDoList.findIndex((i) => i.id == value.id);
+
+    if (!editText) {
+      this.toDoList[index].editButtonHide = true;
+      return;
+    }
     this.toDoList[index].editButtonHide = true;
     this.toDoList[index].value = editText;
+  }
+
+  unDoEdit(value: ToDoList) {
+    const index = this.toDoList.findIndex((i) => i.id == value.id);
+    this.toDoList[index].editButtonHide = true;
   }
 
   uid(): string {
