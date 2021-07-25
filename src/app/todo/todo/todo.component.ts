@@ -1,4 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ToDoList } from '../interfaces/to-do-list';
 
 @Component({
   selector: 'app-todo',
@@ -79,10 +80,4 @@ export class TodoComponent implements OnInit {
   uid(): string {
     return Date.now().toString(36) + Math.random().toString(36).substr(2);
   }
-}
-
-export interface ToDoList {
-  id: string;
-  value: string;
-  editButtonHide: boolean;
 }
