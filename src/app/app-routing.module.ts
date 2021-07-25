@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './login/login/login.component';
-import { TodoComponent } from './todo/todo/todo.component';
 
 const routes: Routes = [
   {
@@ -17,6 +15,11 @@ const routes: Routes = [
     path: 'login',
     loadChildren: () =>
       import('./login/login.module').then((m) => m.LoginModule),
+  },
+  {
+    path: 'forms',
+    loadChildren: () =>
+      import('./forms/forms.module').then((m) => m.FormsModule),
   },
   {
     path: '**',
