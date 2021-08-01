@@ -5,9 +5,14 @@ import { FormComponent } from './form/form.component';
 import { StaticFormComponent } from './static-form/static-form.component';
 
 const routes: Routes = [
-  { path: '', component: FormComponent },
-  { path: 'static', component: StaticFormComponent },
-  { path: 'dynamic', component: DynamicFormComponent },
+  {
+    path: '',
+    component: FormComponent,
+    children: [
+      { path: 'static', component: StaticFormComponent },
+      { path: 'dynamic', component: DynamicFormComponent },
+    ],
+  },
   { path: '**', component: FormComponent },
 ];
 
