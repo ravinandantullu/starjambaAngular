@@ -1,6 +1,6 @@
 #Forms 
 ---
-* Dynamic Forms:
+### Dynamic Forms/Reactive forms:
   * Step 1:
     Import the reactive form module to the app module file
   * Step 2:
@@ -83,12 +83,61 @@
                 <input type="text" formControlName="email"/>
               </div>
           ```
-# Form Validations:
-  * ng-valid --> Valid or invalid form
-  * ng-invalid --> Valid or Invalid form
-  * ng-pending --> 
-  * ng-prestine --> User touched it but data was not modified
-  * Ng-dirty --> Data was touched
-  * ng-touched --> Form was touched
-  * ng-untouched --> 
-    
+    * Step 9:
+      * ng-valid --> Valid or invalid form
+      * ng-invalid --> Valid or Invalid form
+      * ng-pending --> 
+      * ng-prestine --> User touched it but data was not modified
+      * Ng-dirty --> Data was touched
+      * ng-touched --> Form was touched
+      * ng-untouched --> 
+
+### Static Forms/Template Driven Forms: 
+  * Step 1:
+    * ```javascript 
+          import { Component, OnInit } from '@angular/core';
+            import { NgForm } from '@angular/forms';
+
+            @Component({
+              selector: 'app-static-form',
+              templateUrl: './static-form.component.html',
+              styleUrls: ['./static-form.component.sass'],
+            })
+            export class StaticFormComponent implements OnInit {
+              email: string;
+              constructor() {
+                this.email = '';
+              }
+
+              ngOnInit(): void {}
+
+              submit(formValue: NgForm) {
+                console.log(formValue.value);
+              }
+            }
+        ```
+    * ```javascript 
+          <div class="container">
+            <form #signIn="ngForm" (submit)="submit(signIn)">
+              <div class="form-group">
+                <label for="exampleInputEmail1">Email address</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="exampleInputEmail1"
+                  aria-describedby="emailHelp"
+                  placeholder="Enter email"
+                  name="email"
+                  [(ngModel)]="email"
+                  required
+                  minlength="5"
+                />
+              </div>
+              <button type="submit" class="btn btn-primary" [disabled]="!signIn.valid">
+                Submit
+              </button>
+            </form>
+          </div>
+        ```
+      * Reset the form:
+        * signInForm.reset();

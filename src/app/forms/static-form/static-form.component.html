@@ -1,1 +1,21 @@
-<p>Static-form works!</p>
+<div class="container">
+  <form #signIn="ngForm" (submit)="submit(signIn)">
+    <div class="form-group">
+      <label for="exampleInputEmail1">Email address</label>
+      <input
+        type="email"
+        class="form-control"
+        id="exampleInputEmail1"
+        aria-describedby="emailHelp"
+        placeholder="Enter email"
+        name="email"
+        [(ngModel)]="email"
+        required
+        minlength="5"
+      />
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="!signIn.valid">
+      Submit
+    </button>
+  </form>
+</div>
